@@ -1,4 +1,4 @@
-import './MensajesTable.component.css';
+import './MensajesTable.component.scss';
  
 export default function MensajesTable(props) {
   return (

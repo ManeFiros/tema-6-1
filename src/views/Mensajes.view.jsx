@@ -2,18 +2,26 @@ import './Mensajes.view.css'
 import MensajesHeader from '../components/MensajesHeader/MensajesHeader.component';
 import MensajesTable from '../components/MensajesTable/MensajesTable.component';
 import { useState } from 'react';
+import Modal from '../components/Modal/Modal.component';
 
 export default function Mensajes(props){
     const [mensajes, setMensajes] = useState([]);
-    
-    let nuevoMensaje = () => {
+    const [showModal,setShowModal] = useState(false);
+
+    let nuevoMensaje = (e) => {
+        e.preventDefault();
+        setShow();
         let nuevo = {
-            "asunto": "Prueba",
-            "email": "email@email.com",
-            "mensaje": `Este es un mensaje de pruebas... ${Math.random()}`,
+            "asunto": e.target.getElementsByTagName("input")[0].value,
+            "email": e.target.getElementsByTagName("input")[1].value,
+            "mensaje": e.target.getElementsByTagName("textarea")[0].value,
             "leido":false
         };
         setMensajes(mensajes => [...mensajes, nuevo]);
+        
+        e.target.getElementsByTagName("input")[0].value="";
+        e.target.getElementsByTagName("input")[1].value="";
+        e.target.getElementsByTagName("textarea")[0].value="";
     };
 
     let eliminarMensajes = () => {
@@ -30,9 +38,15 @@ export default function Mensajes(props){
         setMensajes([...mensajes]);
     }
 
+    let setShow = () => {
+        setShowModal(!showModal);
+    }
+
     return (
         <div class="Mensajes">
-            <MensajesHeader clickNuevo={nuevoMensaje} clickEliminar={eliminarMensajes}/>
+            <Modal show={showModal} handleClose ={setShow} handleSubmit={nuevoMensaje}/>
+            <MensajesHeader show={showModal} setShow={setShow}
+                        clickNuevo={nuevoMensaje} clickEliminar={eliminarMensajes}/>
             <MensajesTable mensajes={mensajes} clickEliminarUno={eliminarMensaje} 
                 clickMarcarLeido={leerMensaje}/>
         </div>

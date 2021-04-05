@@ -1,3 +1,4 @@
+@import "../styles/colors.scss";
 .MensajesTable {
     width: 100%;
     font-family: arial, sans-serif;
@@ -12,7 +13,7 @@ td, th {
 } 
 .Header { background-color: #dddddd; }
 	
-.Borrar {
+/*.Borrar {
     margin-left: 4px;
     margin-right: 4px;
     
@@ -21,16 +22,37 @@ td, th {
     border-radius: 2px;
  
     color: #EAEAE9;
-}
+}*/
  
-.Borrar { background-color: #f44336; }
+.Borrar { 
+    @extend .Boton;
+    background-color: #f44336; 
+}
  
 .Borrar:hover { background-color: #ce392f; }
 
-.Leido { background-color: #d69732; }
+.Leido { 
+    @extend .Boton;
+    background-color: #d69732; 
+}
  
 .Leido:hover { background-color: #b8822b; }
  
 .ElementoLeido { background-color: #92e6ff; }
  
 .ElementoNOLeido { background-color: #ffffff; }
+
+.Boton {
+    margin-left: 4px;
+    margin-right: 4px;
+    
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 2px;
+ 
+    color: $light;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
